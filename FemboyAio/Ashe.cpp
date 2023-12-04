@@ -197,7 +197,7 @@ namespace ashe
 
 		const auto misctab = mainMenu->add_tab("femboy.Ashe.misc", "Misc");
 		{
-			settings::misc::antigapcloser = misctab->add_checkbox("femboy.Ashe.antigap", "Enable Antigapcloser", true);
+			settings::misc::antigapcloser = misctab->add_checkbox("femboy.Ashe.antigap", "Enable Anti Gapcloser", true);
 			settings::misc::Interrupter = misctab->add_checkbox("femboy.Ashe.interrupt", "Enable Interrupter", true);
 		}
 

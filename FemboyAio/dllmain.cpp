@@ -6,9 +6,10 @@
 #include "Orianna.h"
 #include "Kaisa.h"
 #include "Sivir.h"
+#include "Xerath.h"
 
 PLUGIN_NAME("FemboyAio")
-SUPPORTED_CHAMPIONS(champion_id::Ezreal, champion_id::Ashe, champion_id::Jhin, champion_id::Tristana, champion_id::Orianna, champion_id::Kaisa, champion_id::Sivir);
+SUPPORTED_CHAMPIONS(champion_id::Ezreal, champion_id::Ashe, champion_id::Jhin, champion_id::Tristana, champion_id::Orianna, champion_id::Kaisa, champion_id::Sivir, champion_id::Xerath);
 
 PLUGIN_API bool on_sdk_load(plugin_sdk_core* plugin_sdk_good)
 {
@@ -57,6 +58,12 @@ PLUGIN_API bool on_sdk_load(plugin_sdk_core* plugin_sdk_good)
 		myhero->print_chat(0, "<font color=\"#ff00cb\">[FemboyAio]</font> <font color=\"#ee00cb\">Sivir Loaded!</font>");
 		return true;
 
+	case champion_id::Xerath:
+		xerath::load();
+		console->print("[Femboy] Xerath Loaded!");
+		myhero->print_chat(0, "<font color=\"#ff00cb\">[FemboyAio]</font> <font color=\"#ee00cb\">Xerath Loaded!</font>");
+		return true;
+
 	default:
 		break;
 	}
@@ -94,6 +101,10 @@ PLUGIN_API void on_sdk_unload()
 
 	case champion_id::Sivir:
 		sivir::unload();
+		return;
+
+	case champion_id::Xerath:
+		xerath::unload();
 		return;
 
 	default:

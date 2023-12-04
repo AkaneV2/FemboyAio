@@ -124,7 +124,7 @@ namespace jhin
 			{
 				settings::rsettings::rMode = rsettings->add_combobox("femboy.Jhin.rmode", "R Mode", { {"Auto", nullptr}, {"Tap Key", nullptr} }, 1, true);
 				settings::rsettings::rCombo = rsettings->add_checkbox("femboy.Jhin.user", "Enable R in Combo", true);
-				settings::rsettings::mouseRange = rsettings->add_slider("femboy.Jhin.mouserange", "Mouse Range to get Target", 1000, 500, 1500, true);
+				settings::rsettings::mouseRange = rsettings->add_slider("femboy.Jhin.mouserange", "Cursor Range to get Target", 1000, 500, 1500, true);
 				settings::rsettings::rTapKey = rsettings->add_hotkey("femboy.Jhin.tapkey", "R Tap Key", TreeHotkeyMode::Hold, 0x55, false, true);
 			}
 		}
@@ -825,7 +825,7 @@ namespace jhin
 				{
 					if (args->end_position.distance(myhero) < 350)
 					{
-						if (sender->has_buff(buff_hash("")))
+						if (sender->has_buff(buff_hash("jhinespotteddebuff")))
 						{
 							auto wpred = w->get_prediction(sender);
 							if (wpred.hitchance >= hit_chance::high)

@@ -40,6 +40,9 @@
     <Filter Include="Champions\Sivir">
       <UniqueIdentifier>{d61a7ede-d17e-4905-9d2d-95f8520da57c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Champions\Xerath">
+      <UniqueIdentifier>{9d399385-97ac-4877-a839-5c1478cf8d12}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -78,6 +81,9 @@
     <ClCompile Include="Sivir.cpp">
       <Filter>Champions\Sivir</Filter>
     </ClCompile>
+    <ClCompile Include="Xerath.cpp">
+      <Filter>Champions\Xerath</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="femboyutils.h">
@@ -115,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Sivir.h">
       <Filter>Champions\Sivir</Filter>
+    </ClInclude>
+    <ClInclude Include="Xerath.h">
+      <Filter>Champions\Xerath</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
