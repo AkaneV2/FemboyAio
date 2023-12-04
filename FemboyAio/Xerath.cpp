@@ -10,7 +10,6 @@
 namespace xerath
 {
 	script_spell* q;
-	script_spell* q2;
 	script_spell* w;
 	script_spell* e;
 	script_spell* r;
@@ -942,10 +941,6 @@ namespace xerath
 		q->set_skillshot(0.55f + 0.066f, 70.f, FLT_MAX, {}, skillshot_type::skillshot_line);
 		q->set_charged(735.f, 1450.f, 1.7f);
 		q->set_spell_lock(false);
-
-		q2 = plugin_sdk->register_spell(spellslot::q, 735);
-		q2->set_skillshot(0.52f, 70.f, FLT_MAX, {}, skillshot_type::skillshot_line);
-		q2->set_spell_lock(false);
 
 		w = plugin_sdk->register_spell(spellslot::w, 1000.f);
 		w->set_skillshot(0.55f + 0.066f, 125.f, FLT_MAX, {}, skillshot_type::skillshot_circle);
