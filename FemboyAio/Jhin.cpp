@@ -42,6 +42,11 @@ namespace jhin
 			TreeEntry* rTapKey;
 		}
 
+		namespace harass
+		{
+			TreeEntry* qHarass;
+		}
+
 		namespace killsteal
 		{
 			TreeEntry* ksQ;
@@ -122,6 +127,11 @@ namespace jhin
 				settings::rsettings::mouseRange = rsettings->add_slider("femboy.Jhin.mouserange", "Mouse Range to get Target", 1000, 500, 1500, true);
 				settings::rsettings::rTapKey = rsettings->add_hotkey("femboy.Jhin.tapkey", "R Tap Key", TreeHotkeyMode::Hold, 0x55, false, true);
 			}
+		}
+
+		const auto harrastab = mainMenu->add_tab("femboy.Jhin.harass", "Harass");
+		{
+			settings::harass::qHarass = harrastab->add_checkbox("femboy.Jhin.qharass", "Enable Q Harass", true);
 		}
 
 		const auto cleartab = mainMenu->add_tab("femboy.Jhin.clear", "Clear");
@@ -431,6 +441,24 @@ namespace jhin
 		}
 	}
 
+	void qHarass()
+	{
+		if (settings::harass::qHarass->get_bool())
+		{
+			if (q->is_ready())
+			{
+				auto target = target_selector->get_target(q->range(), damage_type::physical);
+				if (target != nullptr)
+				{
+					if (target->is_valid_target())
+					{
+						q->cast(target);
+					}
+				}
+			}
+		}
+	}
+
 	void on_draw()
 	{
 		if (settings::draws::qRange->get_bool())
@@ -685,6 +713,11 @@ namespace jhin
 		{
 			laneclear();
 			jungleclear();
+		}
+
+		if (orbwalker->harass())
+		{
+			qHarass();
 		}
 
 		killstealloop();

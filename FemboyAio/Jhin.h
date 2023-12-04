@@ -2,6 +2,7 @@
 
 namespace jhin
 {
+	inline void qHarass();
 	inline void antigap(game_object_script sender, antigapcloser::antigapcloser_args* args);
 	inline void killstealQ(const game_object_script& enemy);
 	inline void killstealW(const game_object_script& enemy);

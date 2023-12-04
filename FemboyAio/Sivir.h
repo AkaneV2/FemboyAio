@@ -2,6 +2,7 @@
 
 namespace sivir
 {
+	inline void HarassQ();
 	inline void on_env_draw();
 	inline void on_draw();
 	inline void laneclear();

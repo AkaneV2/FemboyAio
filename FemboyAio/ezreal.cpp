@@ -40,6 +40,11 @@ namespace ezreal
 			TreeEntry* autoRonCC;
 		}
 
+		namespace harass
+		{
+			TreeEntry* qHarass;
+		}
+
 		namespace killsteal
 		{
 			TreeEntry* ksQ;
@@ -194,6 +199,11 @@ namespace ezreal
 				settings::rsettings::semiR = rsettings->add_hotkey("femboy.Ezreal.semir", "Semi R", TreeHotkeyMode::Hold, 0x54, false, true);
 				settings::rsettings::rRange = rsettings->add_slider("femboy.Ezreal.range", "Adjust R Range", 1500, 500, 2500);
 			}
+		}
+
+		const auto harasstab = mainMenu->add_tab("femboy.Ezreal.harass", "Harass");
+		{
+			settings::harass::qHarass = harasstab->add_checkbox("femboy.Ezreal.qharass", "Enable Q in Harass", true);
 		}
 
 		const auto cleartab = mainMenu->add_tab("femboy.Ezreal.clear", "Clear");
@@ -438,6 +448,29 @@ namespace ezreal
 		}
 	}
 
+	void qHarass()
+	{
+		auto qtarget = target_selector->get_target(q->range(), damage_type::physical);
+
+		if (settings::harass::qHarass->get_bool())
+		{
+			if (qtarget != nullptr)
+			{
+				if (q->is_ready())
+				{
+					if (qtarget->is_valid_target())
+					{
+						auto qpred = q->get_prediction(qtarget);
+						if (qpred.hitchance >= getPredIntFromSettings(settings::hitchance::qHitChance->get_int()))
+						{
+							q->cast(qpred.get_cast_position());
+						}
+					}
+				}
+			}
+		}
+	}
+
 	void killstealQ(const game_object_script& enemy)
 	{
 		if (!q->is_ready()) return;
@@ -610,6 +643,11 @@ namespace ezreal
 		{
 			laneclear();
 			jungleclear();
+		}
+
+		if (orbwalker->harass())
+		{
+			qHarass();
 		}
 
 		killstealloop();

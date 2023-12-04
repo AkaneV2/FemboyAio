@@ -2,6 +2,7 @@
 
 namespace ashe
 {
+	inline void HarassW();
 	inline void killstealloop();
 	inline void antigap(game_object_script sender, antigapcloser::antigapcloser_args* args);
 	inline void interrupter();

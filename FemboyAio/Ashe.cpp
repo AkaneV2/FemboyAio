@@ -36,6 +36,11 @@ namespace ashe
 			TreeEntry* SemiR;
 		}
 
+		namespace harass
+		{
+			TreeEntry* wHarass;
+		}
+
 		namespace killsteal
 		{
 			TreeEntry* ksW;
@@ -169,6 +174,11 @@ namespace ashe
 			{
 				settings::rsettings::SemiR = rsettings->add_hotkey("femboy.Ashe.semir", "Semi R", TreeHotkeyMode::Hold, 0x54, false, true);
 			}
+		}
+
+		const auto harrastab = mainMenu->add_tab("femboy.Ashe.harass", "Harass");
+		{
+			settings::harass::wHarass = harrastab->add_checkbox("femboy.Ashe.wharass", "Enable W Harass", true);
 		}
 
 		const auto cleartab = mainMenu->add_tab("femboy.Ashe.clear", "Clear");
@@ -364,6 +374,29 @@ namespace ashe
 		}
 	}
 
+	void HarassW()
+	{
+		auto wtarget = target_selector->get_target(w->range(), damage_type::physical);
+
+		if (settings::harass::wHarass->get_bool())
+		{
+			if (w->is_ready())
+			{
+				if (wtarget != nullptr)
+				{
+					if (wtarget->is_valid_target())
+					{
+						auto wpred = w->get_prediction(wtarget);
+						if (wpred.hitchance >= getPredIntFromSettings(settings::hitchance::wHitChance->get_int()))
+						{
+							w->cast(wpred.get_cast_position());
+						}
+					}
+				}
+			}
+		}
+	}
+
 	void killsteal(const game_object_script& enemy)
 	{
 		if (!w->is_ready()) return;
@@ -516,6 +549,11 @@ namespace ashe
 		{
 			laneclear();
 			jungleclear();
+		}
+
+		if (orbwalker->harass())
+		{
+			HarassW();
 		}
 
 		killstealloop();

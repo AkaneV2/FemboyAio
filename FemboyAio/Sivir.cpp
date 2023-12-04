@@ -32,6 +32,11 @@ namespace sivir
 			TreeEntry* eDangerLevel;
 		}
 
+		namespace harass
+		{
+			TreeEntry* qHarass;
+		}
+
 		namespace killsteal
 		{
 			TreeEntry* ksQ;
@@ -89,6 +94,11 @@ namespace sivir
 				settings::esettings::eEvade = esettings->add_checkbox("femboy.Sivir.evade", "Use E to Evade Spells", true);
 				settings::esettings::eDangerLevel = esettings->add_slider("femboy.Sivir.danger", "Evade Min Danger Level to use E", 5, 1, 5);
 			}
+		}
+
+		const auto harrastab = mainMenu->add_tab("femboy.Sivir.harass", "Harass");
+		{
+			settings::harass::qHarass = harrastab->add_checkbox("femboy.Sivir.qharass", "Enable Q Harass", true);
 		}
 
 		const auto cleartab = mainMenu->add_tab("femboy.Sivir.clear", "Clear");
@@ -342,6 +352,28 @@ namespace sivir
 		}
 	}
 
+	void HarassQ()
+	{
+		if (settings::harass::qHarass->get_bool())
+		{
+			if (q->is_ready())
+			{
+				auto qtarget = target_selector->get_target(q->range(), damage_type::physical);
+				if (qtarget != nullptr)
+				{
+					if (qtarget->is_valid_target())
+					{
+						auto qpred = q->get_prediction(qtarget);
+						if (qpred.hitchance >= getPredIntFromSettings(settings::hitchance::qHitChance->get_int()))
+						{
+							q->cast(qpred.get_cast_position());
+						}
+					}
+				}
+			}
+		}
+	}
+
 	void killstealQ(const game_object_script& enemy)
 	{
 		if (!q->is_ready()) return;
@@ -442,6 +474,11 @@ namespace sivir
 		{
 			laneclear();
 			jungleclear();
+		}
+
+		if (orbwalker->harass())
+		{
+			HarassQ();
 		}
 
 		killstealloop();
