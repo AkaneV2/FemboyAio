@@ -13,10 +13,108 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{77083612-42e7-4b29-903d-993922fa6965}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Champions">
+      <UniqueIdentifier>{2de538b8-c6bf-413e-9218-56e488f2291c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Champions\Ezreal">
+      <UniqueIdentifier>{5aceeaf9-53da-4b17-957a-f5c4ad084676}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Champions\Ashe">
+      <UniqueIdentifier>{558a2ee4-ca60-4568-b8d8-2bc34e10919e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Champions\Jhin">
+      <UniqueIdentifier>{3bbe8bb2-310f-4010-bae5-775dcbfade18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Champions\Tristana">
+      <UniqueIdentifier>{b340bb08-7e70-4a05-bf65-f6161745cadb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Champions\Orianna">
+      <UniqueIdentifier>{cb4f16f8-086d-4b68-b478-c2f921a0dcab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Champions\Kaisa">
+      <UniqueIdentifier>{8437674d-dc44-4d45-b25f-ea2cb2e805bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Champions\Sivir">
+      <UniqueIdentifier>{d61a7ede-d17e-4905-9d2d-95f8520da57c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
+    <ClCompile Include="femboyutils.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Permashow.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="ezreal.cpp">
+      <Filter>Champions\Ezreal</Filter>
+    </ClCompile>
+    <ClCompile Include="Ashe.cpp">
+      <Filter>Champions\Ashe</Filter>
+    </ClCompile>
+    <ClCompile Include="Jhin.cpp">
+      <Filter>Champions\Jhin</Filter>
+    </ClCompile>
+    <ClCompile Include="Tristana.cpp">
+      <Filter>Champions\Tristana</Filter>
+    </ClCompile>
+    <ClCompile Include="Orianna.cpp">
+      <Filter>Champions\Orianna</Filter>
+    </ClCompile>
+    <ClCompile Include="Kaisa.cpp">
+      <Filter>Champions\Kaisa</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugin_sdk\clipper.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="..\plugin_sdk\plugin_sdk.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Sivir.cpp">
+      <Filter>Champions\Sivir</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="femboyutils.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Permashow.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ezreal.h">
+      <Filter>Champions\Ezreal</Filter>
+    </ClInclude>
+    <ClInclude Include="Ashe.h">
+      <Filter>Champions\Ashe</Filter>
+    </ClInclude>
+    <ClInclude Include="Jhin.h">
+      <Filter>Champions\Jhin</Filter>
+    </ClInclude>
+    <ClInclude Include="Tristana.h">
+      <Filter>Champions\Tristana</Filter>
+    </ClInclude>
+    <ClInclude Include="Orianna.h">
+      <Filter>Champions\Orianna</Filter>
+    </ClInclude>
+    <ClInclude Include="Kaisa.h">
+      <Filter>Champions\Kaisa</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plugin_sdk\clipper.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plugin_sdk\cpplinq.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="..\plugin_sdk\plugin_sdk.hpp">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="Sivir.h">
+      <Filter>Champions\Sivir</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
