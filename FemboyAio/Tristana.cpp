@@ -229,6 +229,11 @@ namespace tristana
 
 	void beforeaa(game_object_script target, bool* process)
 	{
+		if (!orbwalker->combo_mode())
+		{
+			return;
+		}
+
 		if (settings::qsettings::qCombo->get_bool())
 		{
 			if (q->is_ready())
