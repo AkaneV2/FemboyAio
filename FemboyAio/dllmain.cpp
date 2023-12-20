@@ -7,9 +7,11 @@
 #include "Kaisa.h"
 #include "Sivir.h"
 #include "Xerath.h"
+#include "Corki.h"
+#include "Yasuo.h"
 
 PLUGIN_NAME("FemboyAio")
-SUPPORTED_CHAMPIONS(champion_id::Ezreal, champion_id::Ashe, champion_id::Jhin, champion_id::Tristana, champion_id::Orianna, champion_id::Kaisa, champion_id::Sivir, champion_id::Xerath);
+SUPPORTED_CHAMPIONS(champion_id::Ezreal, champion_id::Ashe, champion_id::Jhin, champion_id::Tristana, champion_id::Orianna, champion_id::Kaisa, champion_id::Sivir, champion_id::Xerath, champion_id::Corki, champion_id::Yasuo);
 
 PLUGIN_API bool on_sdk_load(plugin_sdk_core* plugin_sdk_good)
 {
@@ -64,6 +66,18 @@ PLUGIN_API bool on_sdk_load(plugin_sdk_core* plugin_sdk_good)
 		myhero->print_chat(0, "<font color=\"#ff00cb\">[FemboyAio]</font> <font color=\"#ee00cb\">Xerath Loaded!</font>");
 		return true;
 
+	case champion_id::Corki:
+		corki::load();
+		console->print("[Femboy] Corki Loaded!");
+		myhero->print_chat(0, "<font color=\"#ff00cb\">[FemboyAio]</font> <font color=\"#ee00cb\">Corki Loaded!</font>");
+		return true;
+
+	case champion_id::Yasuo:
+		yasuo::load();
+		console->print("[Femboy] Yasuo Loaded!");
+		myhero->print_chat(0, "<font color=\"#ff00cb\">[FemboyAio]</font> <font color=\"#ee00cb\">Yasuo Loaded!</font>");
+		return true;
+
 	default:
 		break;
 	}
@@ -105,6 +119,14 @@ PLUGIN_API void on_sdk_unload()
 
 	case champion_id::Xerath:
 		xerath::unload();
+		return;
+
+	case champion_id::Corki:
+		corki::unload();
+		return;
+
+	case champion_id::Yasuo:
+		yasuo::unload();
 		return;
 
 	default:

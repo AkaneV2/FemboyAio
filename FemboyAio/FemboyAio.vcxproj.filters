@@ -43,6 +43,12 @@
     <Filter Include="Champions\Xerath">
       <UniqueIdentifier>{9d399385-97ac-4877-a839-5c1478cf8d12}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Champions\Corki">
+      <UniqueIdentifier>{5ca2b800-5cfa-4b3a-a945-ff9cdc58d83b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Champions\Yasuo">
+      <UniqueIdentifier>{2f93bec9-538a-4f51-8598-adbd64112a57}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -84,6 +90,12 @@
     <ClCompile Include="Xerath.cpp">
       <Filter>Champions\Xerath</Filter>
     </ClCompile>
+    <ClCompile Include="Corki.cpp">
+      <Filter>Champions\Corki</Filter>
+    </ClCompile>
+    <ClCompile Include="Yasuo.cpp">
+      <Filter>Champions\Yasuo</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="femboyutils.h">
@@ -124,6 +136,12 @@
     </ClInclude>
     <ClInclude Include="Xerath.h">
       <Filter>Champions\Xerath</Filter>
+    </ClInclude>
+    <ClInclude Include="Corki.h">
+      <Filter>Champions\Corki</Filter>
+    </ClInclude>
+    <ClInclude Include="Yasuo.h">
+      <Filter>Champions\Yasuo</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

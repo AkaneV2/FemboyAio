@@ -483,7 +483,7 @@ namespace xerath
 							if (wpred.hitchance >= hit_chance::dashing)
 							{
 								w->cast(wpred.get_cast_position());
-								console->print("[FemboyAio] Casting W n Dash");
+								console->print("[FemboyAio] Casting W on Dash");
 							}
 						}
 

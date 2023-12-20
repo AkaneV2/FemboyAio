@@ -81,6 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>..\..\..\..\..\..\..\AppData\Roaming\c819e0a8f31190af4eec059da822b095\plugins\x64</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -160,6 +161,7 @@
     <ClCompile Include="..\plugin_sdk\clipper.cpp" />
     <ClCompile Include="..\plugin_sdk\plugin_sdk.cpp" />
     <ClCompile Include="Ashe.cpp" />
+    <ClCompile Include="Corki.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="ezreal.cpp" />
     <ClCompile Include="femboyutils.cpp" />
@@ -170,12 +172,14 @@
     <ClCompile Include="Sivir.cpp" />
     <ClCompile Include="Tristana.cpp" />
     <ClCompile Include="Xerath.cpp" />
+    <ClCompile Include="Yasuo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\plugin_sdk\clipper.h" />
     <ClInclude Include="..\plugin_sdk\cpplinq.h" />
     <ClInclude Include="..\plugin_sdk\plugin_sdk.hpp" />
     <ClInclude Include="Ashe.h" />
+    <ClInclude Include="Corki.h" />
     <ClInclude Include="ezreal.h" />
     <ClInclude Include="femboyutils.h" />
     <ClInclude Include="Jhin.h" />
@@ -185,6 +189,7 @@
     <ClInclude Include="Sivir.h" />
     <ClInclude Include="Tristana.h" />
     <ClInclude Include="Xerath.h" />
+    <ClInclude Include="Yasuo.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
