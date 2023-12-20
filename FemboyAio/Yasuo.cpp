@@ -796,8 +796,8 @@ namespace yasuo
 	{
 		if (orbwalker->combo_mode())
 		{
-			ELogic();
 			eqlogic();
+			ELogic();			
 			QLogic();
 			RLogic();
 		}
