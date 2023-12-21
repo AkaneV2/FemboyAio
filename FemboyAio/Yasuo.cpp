@@ -457,11 +457,18 @@ namespace yasuo
 			{
 				if (eqtarget->is_valid_target())
 				{
-					if (eqtarget->get_distance(myhero) > 250 && eqtarget->get_distance(myhero) < 475)
+					if (eqtarget->get_distance(myhero) > 175 && eqtarget->get_distance(myhero) < 475)
 					{
-						e->cast(eqtarget);
-						q->cast(eqtarget);
+						e->cast(eqtarget);						
 					}
+
+					if (myhero->is_dashing())
+					{
+						if (eqtarget->get_distance(myhero) < 280)
+						{
+							q->cast(eqtarget);
+						}
+					}					
 				}
 			}
 		}
@@ -490,7 +497,7 @@ namespace yasuo
 					if (q3pred.hitchance >= hit_chance::dashing)
 					{
 						q3->cast(q3pred.get_cast_position());
-						console->print("[FemboyAio] Casting Q3 on Dashing Target");
+						console->print("[FemboyAio] Casting Q3 on Dashing/Immobile Target");
 					}
 				}
 			}
@@ -514,7 +521,7 @@ namespace yasuo
 							{
 								if (target->get_distance(myhero) > 300)
 								{
-									if (min->is_valid_target(e->range()) && !min->is_dead())
+									if (min->is_valid_target(e->range()) && !min->is_dead() && !min->has_buff(buff_hash("YasuoE")))
 									{
 										auto posaftergap = myhero->get_position().extend(min->get_position(), 475);
 										if (!settings::esettings::ETowerDive->get_bool())
