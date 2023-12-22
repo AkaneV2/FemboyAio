@@ -37,6 +37,7 @@ namespace yasuo
 			TreeEntry* VeigarR;
 			TreeEntry* TeemoQ;
 			TreeEntry* TristR;
+			TreeEntry* SyndraR;
 		}
 
 		namespace esettings
@@ -141,6 +142,11 @@ namespace yasuo
 					if (enemys->get_base_skin_name() == "MissFortune")
 					{
 						settings::wsettings::MFQ = wsettings->add_checkbox("femboy.Yasuo.mfq", "Block Miss Fortune Q", true);
+					}
+
+					if (enemys->get_base_skin_name() == "Syndra")
+					{
+						settings::wsettings::SyndraR = wsettings->add_checkbox("femboy.Yasuo.syndrar", "Block Syndra R", true);
 					}
 
 					if (enemys->get_base_skin_name() == "Teemo")
@@ -1180,7 +1186,28 @@ namespace yasuo
 							}
 						}
 					}
-				}				
+				}
+
+				if (enemy->get_base_skin_name() == "Syndra" || sender->get_base_skin_name() == "Syndra")
+				{
+					if (settings::wsettings::SyndraR->get_bool())
+					{
+						if (enemy != nullptr)
+						{
+							if (enemy->get_base_skin_name() == "Syndra" || sender->get_base_skin_name() == "Syndra")
+							{
+								if (spell->get_spellslot() == spellslot::r)
+								{
+									if (spell->get_last_target_id() == myhero->get_id())
+									{
+										console->print("Blocking Syndra R");
+										w->cast(enemy->get_position());
+									}
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 	}
