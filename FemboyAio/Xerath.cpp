@@ -327,7 +327,7 @@ namespace xerath
 		{
 			if (qtarget != nullptr)
 			{
-				if (w->is_ready() && myhero->is_in_auto_attack_range(qtarget))
+				if (w->is_ready() && qtarget->get_distance(myhero) < w->range())
 				{
 					return;
 				}
@@ -569,13 +569,19 @@ namespace xerath
 									{
 										r->cast(rpred.get_cast_position());
 									}
-									else if (settings::rsettings::r2mode->get_int() == 1)
+
+									if (settings::rsettings::r2mode->get_int() == 1)
 									{
 										if (settings::rsettings::r2Key->get_bool())
 										{
 											r->cast(rpred.get_cast_position());
 										}
 									}
+								}
+
+								if (rpred.hitchance >= hit_chance::dashing)
+								{
+									r->cast(rpred.get_cast_position());
 								}
 							}
 						}
@@ -1074,6 +1080,7 @@ namespace xerath
 					if (args->end_position.distance(myhero) <= 450)
 					{
 						e->cast(args->end_position);
+						console->print("[FemboyAio] Casting E on Gap Closer End Position");
 					}
 				}
 			}
@@ -1096,6 +1103,7 @@ namespace xerath
 							if (epred.hitchance >= hit_chance::high)
 							{
 								e->cast(enemy);
+								console->print("[FemboyAio] Casting E ib %s", enemy->get_name_cstr());
 							}
 						}
 					}
