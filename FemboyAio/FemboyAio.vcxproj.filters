@@ -49,6 +49,9 @@
     <Filter Include="Champions\Yasuo">
       <UniqueIdentifier>{2f93bec9-538a-4f51-8598-adbd64112a57}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Champions\Kalista">
+      <UniqueIdentifier>{d8659f01-3868-432a-aac1-0d0f70875bd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -96,6 +99,9 @@
     <ClCompile Include="Yasuo.cpp">
       <Filter>Champions\Yasuo</Filter>
     </ClCompile>
+    <ClCompile Include="Kalista.cpp">
+      <Filter>Champions\Kalista</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="femboyutils.h">
@@ -142,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="Yasuo.h">
       <Filter>Champions\Yasuo</Filter>
+    </ClInclude>
+    <ClInclude Include="Kalista.h">
+      <Filter>Champions\Kalista</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

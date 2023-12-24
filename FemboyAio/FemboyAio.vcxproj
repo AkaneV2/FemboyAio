@@ -167,6 +167,7 @@
     <ClCompile Include="femboyutils.cpp" />
     <ClCompile Include="Jhin.cpp" />
     <ClCompile Include="Kaisa.cpp" />
+    <ClCompile Include="Kalista.cpp" />
     <ClCompile Include="Orianna.cpp" />
     <ClCompile Include="Permashow.cpp" />
     <ClCompile Include="Sivir.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="femboyutils.h" />
     <ClInclude Include="Jhin.h" />
     <ClInclude Include="Kaisa.h" />
+    <ClInclude Include="Kalista.h" />
     <ClInclude Include="Orianna.h" />
     <ClInclude Include="Permashow.h" />
     <ClInclude Include="Sivir.h" />
