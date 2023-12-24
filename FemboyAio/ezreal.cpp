@@ -19,6 +19,7 @@ namespace ezreal
 		namespace qsettings
 		{
 			TreeEntry* qCombo;
+			TreeEntry* AutoQ;
 		}
 
 		namespace wsettings
@@ -176,6 +177,7 @@ namespace ezreal
 			qsettings->set_texture(myhero->get_spell(spellslot::q)->get_icon_texture());
 			{
 				settings::qsettings::qCombo = qsettings->add_checkbox("femboy Ezreal.useq", "Enable Q in Combo", true);
+				settings::qsettings::AutoQ = qsettings->add_checkbox("femboy.Ezreal.autoq", "Auto Q on Dash/CC", true);
 			}
 
 			const auto wsettings = combotab->add_tab("femboy.Ezreal.wsettings", "Essence Flux - [W]");
@@ -326,6 +328,29 @@ namespace ezreal
 					{
 						auto qpred = q->get_prediction(qtarget);
 						if (qpred.hitchance >= getPredIntFromSettings(settings::hitchance::qHitChance->get_int()))
+						{
+							q->cast(qpred.get_cast_position());
+						}
+					}
+				}
+			}
+		}
+	}
+
+	void AutoQ()
+	{
+		auto qtarget = target_selector->get_target(q->range(), damage_type::physical);
+		if (settings::qsettings::AutoQ->get_bool())
+		{
+			if (q->is_ready())
+			{
+				auto qtarget = target_selector->get_target(q->range(), damage_type::physical);
+				if (qtarget != nullptr)
+				{
+					if (qtarget->is_valid_target())
+					{
+						auto qpred = q->get_prediction(qtarget);
+						if (qpred.hitchance >= hit_chance::dashing)
 						{
 							q->cast(qpred.get_cast_position());
 						}
@@ -650,6 +675,7 @@ namespace ezreal
 			qHarass();
 		}
 
+		AutoQ();
 		killstealloop();
 		autoR();
 	}

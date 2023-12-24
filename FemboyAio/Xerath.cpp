@@ -529,7 +529,7 @@ namespace xerath
 							if (epred.hitchance >= hit_chance::dashing)
 							{
 								e->cast(epred.get_cast_position());
-								console->print("Casting E On Dash");
+								console->print("[FemboyAio] Casting E On Dash");
 							}
 						}
 

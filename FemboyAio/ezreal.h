@@ -2,6 +2,7 @@
 
 namespace ezreal
 {
+	inline void AutoQ();
 	inline void qHarass();
 	inline void killstealloop();
 	inline void killstealQ(const game_object_script& enemy);
