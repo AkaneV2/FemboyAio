@@ -2,6 +2,7 @@
 
 namespace kalista
 {
+	inline void onbuffgain2(game_object_script sender, buff_instance_script buff);
 	inline void laneclear();
 	inline void jungleclear();
 	inline void Rlogic();

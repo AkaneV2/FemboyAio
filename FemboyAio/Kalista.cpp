@@ -32,6 +32,8 @@ namespace kalista
 		namespace rsettings
 		{
 			TreeEntry* AutoRSave;
+			TreeEntry* Ballista;
+			TreeEntry* Ballistarange;
 		}
 
 		namespace killsteal
@@ -92,6 +94,14 @@ namespace kalista
 			{
 				settings::rsettings::AutoRSave = rsettings->add_checkbox("femboy.Kalista.autosave", "Auto Save Ally if Incomming Damage is Higher then his HP", true);
 				settings::rsettings::AutoRSave->set_tooltip("DONT RELOAD AFTER CONNECTING WITH YOUR ALLY OTHER WISE THE R LOGICS IS BROKEN FOR THE WHOLE ROUND!");
+				for (auto&& allys : entitylist->get_ally_heroes())
+				{
+					if (allys->get_base_skin_name() == "Blitzcrank")
+					{
+						settings::rsettings::Ballista = rsettings->add_checkbox("femboy.Kalista.ballista", "Enable Ballista", true);
+						settings::rsettings::Ballistarange = rsettings->add_slider("femoby.Kalista.ballistarange", "Min Range to Ally To Ballista", 150, 0, 600);
+					}
+				}
 			}
 		}
 
@@ -522,6 +532,7 @@ namespace kalista
 		
 		event_handler<events::on_update>::add_callback(update, event_prority::highest);
 		event_handler<events::on_buff_gain>::add_callback(onbuffgain, event_prority::high);
+		event_handler<events::on_buff_gain>::add_callback(onbuffgain2, event_prority::high);
 		event_handler<events::on_draw>::add_callback(on_draw_real, event_prority::high);
 		event_handler<events::on_env_draw>::add_callback(on_draw_env, event_prority::high);
 	}
@@ -535,6 +546,7 @@ namespace kalista
 
 		event_handler<events::on_update>::remove_handler(update);
 		event_handler<events::on_buff_gain>::remove_handler(onbuffgain);
+		event_handler<events::on_buff_gain>::remove_handler(onbuffgain2);
 		event_handler<events::on_draw>::remove_handler(on_draw_real);
 		event_handler<events::on_env_draw>::remove_handler(on_draw_env);
 	}
@@ -614,5 +626,26 @@ namespace kalista
 				ally = sender;
 			}
 		}
-	}		
+	}
+
+	void onbuffgain2(game_object_script sender, buff_instance_script buff)
+	{
+		if (ally != nullptr)
+		{
+			if (ally->get_base_skin_name() == "Blitzcrank")
+			{
+				if (settings::rsettings::Ballista->get_bool())
+				{
+					if (myhero->get_distance(ally) >= settings::rsettings::Ballistarange->get_int() && ally->get_distance(myhero) <= r->range())
+					{
+						if (sender->is_enemy() && sender->has_buff(buff_hash("rocketgrab2")) && sender->is_ai_hero())
+						{
+							r->cast();
+							myhero->print_chat(0, "Casting Balista Combo!");
+						}
+					}
+				}
+			}
+		}
+	}
 }
