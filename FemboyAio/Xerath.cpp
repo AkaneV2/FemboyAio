@@ -91,6 +91,7 @@ namespace xerath
 			TreeEntry* antigap;
 			TreeEntry* antigaphp;
 			TreeEntry* interrupter;
+			TreeEntry* AutoBlueward;
 		}
 	}
 
