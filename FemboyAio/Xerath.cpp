@@ -458,48 +458,48 @@ namespace xerath
 
 	void autoW()
 	{
-		if (myhero->has_buff(buff_hash("XerathLocusOfPower2")))
-		{
-			return;
-		}
+if (myhero->has_buff(buff_hash("XerathLocusOfPower2")))
+{
+	return;
+}
 
-		if (myhero->has_buff(buff_hash("XerathArcanopulseChargeUp")))
-		{
-			return;
-		}
+if (myhero->has_buff(buff_hash("XerathArcanopulseChargeUp")))
+{
+	return;
+}
 
-		if (settings::wsettings::autoW->get_bool())
+if (settings::wsettings::autoW->get_bool())
+{
+	if (w->is_ready())
+	{
+		auto wtarget = target_selector->get_target(w->range(), damage_type::magical);
+		if (wtarget != nullptr)
 		{
-			if (w->is_ready())
+			if (wtarget->is_valid_target())
 			{
-				auto wtarget = target_selector->get_target(w->range(), damage_type::magical);
-				if (wtarget != nullptr)
+				if (wtarget->is_dashing())
 				{
-					if (wtarget->is_valid_target())
+					auto wpred = w->get_prediction(wtarget);
+					if (wpred.hitchance >= hit_chance::dashing)
 					{
-						if (wtarget->is_dashing())
-						{
-							auto wpred = w->get_prediction(wtarget);
-							if (wpred.hitchance >= hit_chance::dashing)
-							{
-								w->cast(wpred.get_cast_position());
-								console->print("[FemboyAio] Casting W on Dash");
-							}
-						}
+						w->cast(wpred.get_cast_position());
+						console->print("[FemboyAio] Casting W on Dash");
+					}
+				}
 
-						if (wtarget->has_buff_type(buff_type::Stun) || wtarget->has_buff_type(buff_type::Snare))
-						{
-							auto wpred = w->get_prediction(wtarget);
-							if (wpred.hitchance >= hit_chance::immobile)
-							{
-								w->cast(wpred.get_cast_position());
-								console->print("[FemboyAio] Casting W on CC");
-							}
-						}
+				if (wtarget->has_buff_type(buff_type::Stun) || wtarget->has_buff_type(buff_type::Snare))
+				{
+					auto wpred = w->get_prediction(wtarget);
+					if (wpred.hitchance >= hit_chance::immobile)
+					{
+						w->cast(wpred.get_cast_position());
+						console->print("[FemboyAio] Casting W on CC");
 					}
 				}
 			}
 		}
+	}
+}
 	}
 
 	void autoE()
@@ -554,39 +554,37 @@ namespace xerath
 		{
 			if (myhero->has_buff(buff_hash("XerathLocusOfPower2")))
 			{
-				for (const auto& target : entitylist->get_enemy_heroes())
+				auto rtarget = target_selector->get_target(r->range(), damage_type::magical);
+				if (rtarget != nullptr)
 				{
-					if (target->get_distance(myhero) <= r->range())
+					if (rtarget->get_distance(myhero) <= r->range())
 					{
-						if (target != nullptr)
+						if (hud->get_hud_input_logic()->get_game_cursor_position().distance(rtarget->get_position()) <= settings::rsettings::r2cursorRange->get_int())
 						{
-							if (hud->get_hud_input_logic()->get_game_cursor_position().distance(target->get_position()) <= settings::rsettings::r2cursorRange->get_int())
+							auto rpred = r->get_prediction(rtarget);
+							if (rpred.hitchance >= getPredIntFromSettings(settings::hitchance::r2HitChance->get_int()))
 							{
-								auto rpred = r->get_prediction(target);
-								if (rpred.hitchance >= getPredIntFromSettings(settings::hitchance::r2HitChance->get_int()))
-								{
-									if (settings::rsettings::r2mode->get_int() == 0)
-									{
-										r->cast(rpred.get_cast_position());
-									}
-
-									if (settings::rsettings::r2mode->get_int() == 1)
-									{
-										if (settings::rsettings::r2Key->get_bool())
-										{
-											r->cast(rpred.get_cast_position());
-										}
-									}
-								}
-
-								if (rpred.hitchance >= hit_chance::dashing)
+								if (settings::rsettings::r2mode->get_int() == 0)
 								{
 									r->cast(rpred.get_cast_position());
 								}
+
+								if (settings::rsettings::r2mode->get_int() == 1)
+								{
+									if (settings::rsettings::r2Key->get_bool())
+									{
+										r->cast(rpred.get_cast_position());
+									}
+								}
+							}
+
+							if (rpred.hitchance >= hit_chance::dashing)
+							{
+								r->cast(rpred.get_cast_position());
 							}
 						}
 					}
-				}
+				}				
 			}
 		}
 	}
@@ -1103,7 +1101,7 @@ namespace xerath
 							if (epred.hitchance >= hit_chance::high)
 							{
 								e->cast(enemy);
-								console->print("[FemboyAio] Casting E ib %s", enemy->get_name_cstr());
+								console->print("[FemboyAio] Casting E on %s", enemy->get_name_cstr());
 							}
 						}
 					}
