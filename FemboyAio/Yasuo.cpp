@@ -518,36 +518,39 @@ namespace yasuo
 		{
 			if (settings::esettings::eGapclose->get_bool())
 			{
-				auto target = target_selector->get_target(settings::esettings::eGapCloseTargetScanRange->get_int(), damage_type::magical);
-				if (target != nullptr)
+				if (e->is_ready())
 				{
-					for (const auto& min : entitylist->get_enemy_minions())
+					auto target = target_selector->get_target(settings::esettings::eGapCloseTargetScanRange->get_int(), damage_type::magical);
+					if (target != nullptr)
 					{
-						if (min != nullptr)
+						for (const auto& min : entitylist->get_enemy_minions())
 						{
-							if (target != nullptr)
+							if (min != nullptr)
 							{
-								if (target->get_distance(myhero) > 300)
+								if (target != nullptr)
 								{
-									if (min->is_valid_target(e->range()) && !min->is_dead() && !min->has_buff(buff_hash("YasuoE")))
+									if (target->get_distance(myhero) > 300)
 									{
-										if (min->get_distance(target) < myhero->get_distance(target))
+										if (min->is_valid_target(e->range()) && !min->is_dead() && !min->has_buff(buff_hash("YasuoE")))
 										{
-											auto posaftergap = myhero->get_position().extend(min->get_position(), 475);
-											if (!settings::esettings::ETowerDive->get_bool())
+											if (min->get_distance(target) < myhero->get_distance(target))
 											{
-												if (posaftergap.is_under_enemy_turret())
+												auto posaftergap = myhero->get_position().extend(min->get_position(), 475);
+												if (!settings::esettings::ETowerDive->get_bool())
 												{
-													return;
+													if (posaftergap.is_under_enemy_turret())
+													{
+														return;
+													}
+													else
+													{
+														e->cast(min);
+													}
 												}
 												else
 												{
 													e->cast(min);
 												}
-											}
-											else
-											{
-												e->cast(min);
 											}
 										}
 									}
