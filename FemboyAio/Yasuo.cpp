@@ -34,6 +34,7 @@ namespace yasuo
 			TreeEntry* LuLuW;
 			TreeEntry* FiddleQ;
 			TreeEntry* MFQ;
+			TreeEntry* MFR;
 			TreeEntry* VeigarR;
 			TreeEntry* TeemoQ;
 			TreeEntry* TristR;
@@ -142,6 +143,7 @@ namespace yasuo
 					if (enemys->get_base_skin_name() == "MissFortune")
 					{
 						settings::wsettings::MFQ = wsettings->add_checkbox("femboy.Yasuo.mfq", "Block Miss Fortune Q", true);
+						settings::wsettings::MFR = wsettings->add_checkbox("femboy.Yasuo.mfr", "Block Miss Fortune R", true);
 					}
 
 					if (enemys->get_base_skin_name() == "Syndra")
@@ -529,21 +531,24 @@ namespace yasuo
 								{
 									if (min->is_valid_target(e->range()) && !min->is_dead() && !min->has_buff(buff_hash("YasuoE")))
 									{
-										auto posaftergap = myhero->get_position().extend(min->get_position(), 475);
-										if (!settings::esettings::ETowerDive->get_bool())
+										if (min->get_distance(target) < myhero->get_distance(target))
 										{
-											if (posaftergap.is_under_enemy_turret())
+											auto posaftergap = myhero->get_position().extend(min->get_position(), 475);
+											if (!settings::esettings::ETowerDive->get_bool())
 											{
-												return;
+												if (posaftergap.is_under_enemy_turret())
+												{
+													return;
+												}
+												else
+												{
+													e->cast(min);
+												}
 											}
 											else
 											{
 												e->cast(min);
 											}
-										}
-										else
-										{
-											e->cast(min);
 										}
 									}
 								}
@@ -854,6 +859,7 @@ namespace yasuo
 
 		antigapcloser::add_event_handler(antigap);
 		event_handler<events::on_process_spell_cast>::add_callback(blockspellswithW, event_prority::high);
+		event_handler<events::on_process_spell_cast>::add_callback(onprocess, event_prority::high);
 		event_handler<events::on_update>::add_callback(update, event_prority::highest);
 		event_handler<events::on_env_draw>::add_callback(on_draw_env, event_prority::high);
 		event_handler<events::on_draw>::add_callback(on_draw_real, event_prority::high);
@@ -871,6 +877,7 @@ namespace yasuo
 			plugin_sdk->remove_spell(flash);
 
 		antigapcloser::remove_event_handler(antigap);
+		event_handler<events::on_process_spell_cast>::remove_handler(onprocess);
 		event_handler<events::on_update>::remove_handler(update);
 		event_handler<events::on_env_draw>::remove_handler(on_draw_env);
 		event_handler<events::on_draw>::remove_handler(on_draw_real);
@@ -1209,6 +1216,39 @@ namespace yasuo
 					}
 				}
 			}
+		}
+	}
+
+	void onprocess(game_object_script sender, spell_instance_script spell)
+	{
+		for (auto&& enemys : entitylist->get_enemy_heroes())
+		{
+			if (enemys != nullptr)
+			{
+				if (enemys->get_base_skin_name() == "MissFortune")
+				{
+					if (settings::wsettings::MFR->get_bool())
+					{												
+						if (enemys->is_valid())
+						{							
+							if (enemys->get_base_skin_name() == "MissFortune")
+							{								
+								for (auto spells : evade->get_skillshots())
+								{									
+									if (spells.spell_data_name == "MissFortuneBulletTime")
+									{																	
+										if (spells.polygon.is_inside(myhero->get_position()))
+										{
+											console->print("Blocking MF R");
+											w->cast(enemys->get_position());
+										}										
+									}								
+								}							
+							}						
+						}						
+					}										
+				}
+			}						
 		}
 	}
 }

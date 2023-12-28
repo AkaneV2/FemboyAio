@@ -52,6 +52,9 @@
     <Filter Include="Champions\Kalista">
       <UniqueIdentifier>{d8659f01-3868-432a-aac1-0d0f70875bd8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Champions\Zeri">
+      <UniqueIdentifier>{71163750-e276-42db-bac8-5728f4dd1147}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">
@@ -102,6 +105,9 @@
     <ClCompile Include="Kalista.cpp">
       <Filter>Champions\Kalista</Filter>
     </ClCompile>
+    <ClCompile Include="Zeri.cpp">
+      <Filter>Champions\Zeri</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="femboyutils.h">
@@ -151,6 +157,9 @@
     </ClInclude>
     <ClInclude Include="Kalista.h">
       <Filter>Champions\Kalista</Filter>
+    </ClInclude>
+    <ClInclude Include="Zeri.h">
+      <Filter>Champions\Zeri</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

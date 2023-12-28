@@ -2,7 +2,6 @@
 
 namespace xerath
 {	
-	inline void autoward();
 	inline void jungleclear();
 	inline void laneclear();
 	inline void killstealloop();

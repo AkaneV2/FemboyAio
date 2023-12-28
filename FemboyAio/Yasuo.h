@@ -2,6 +2,7 @@
 
 namespace yasuo
 {
+	inline void onprocess(game_object_script sender, spell_instance_script spell);
 	inline void blockspellswithW(game_object_script sender, spell_instance_script spell);
 	inline void laneclear();
 	inline void jungleclear();
